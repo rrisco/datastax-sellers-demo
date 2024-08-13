@@ -1,4 +1,3 @@
-#s3 endpoint http://aws-speed-date.s3-website-us-east-1.amazonaws.com/
 
 # Importing libraries
 import imaplib, email
@@ -23,6 +22,7 @@ MAIL_PWD = os.getenv("MAIL_PWD")
 USER = os.getenv("USER")
 IMAP_URL = os.getenv("IMAP_URL")
 S3_ENDPOINT = os.getenv("S3_ENDPOINT")
+FETCH_GMAIL_ADDRESSES = os.getenv("FROM_GMAIL_ADDRESSES")
 IMAGE_MAX_SIZE = 1000 # px
 
 ASTRA_DB_ENDPOINT = os.getenv("ASTRA_DB_ENDPOINT")
@@ -200,7 +200,6 @@ def get_body(id, mail):
 def get_email_images():
     images = []
     mail_conn = email_connection("Inbox")
-    FETCH_GMAIL_ADDRESSES = ['rriscof@gmail.com', 'rajeev.dave@datastax.com', 'roberto.flores@datastax.com']
     for address in FETCH_GMAIL_ADDRESSES:
         result, result_bytes = mail_conn.search(None, f'(FROM "{address}" UNSEEN)')
         email_results = result_bytes[0].split()
